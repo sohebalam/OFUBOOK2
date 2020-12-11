@@ -1,5 +1,6 @@
 import express from "express"
 import asyncHandler from "express-async-handler"
+import authMiddlware from "../middleware/authMiddleware.js"
 import Course from "../models/course.js"
 const courseRouter = express.Router()
 
@@ -16,9 +17,53 @@ courseRouter.post(
       
     } catch (error) {
       res.status(500)
-      throw new Error(error)
+      throw new Error('courses not created')
     }
   })
 )
+courseRouter.get(
+  "/",
+
+  asyncHandler(async (req, res) => {
+    try {
+      const course = await Course.find({})
+      res.status(200)
+      console.log(course)
+      res.json(course)
+      
+    } catch (error) {
+      res.status(500)
+      throw new Error('there are no books')
+    }
+  })
+)
+courseRouter.put(
+  "/:id",
+
+  authMiddlware, asyncHandler(async (req, res) => {
+    // res.send(req.params.id)
+
+
+
+
+   
+      const course = await Course.findById(req.params.id)
+      
+      if(course) {
+        const updatedCourse = await Course.findOneAndUpdate(req.params.id, req.body, {
+          new: true,
+          runValidators: true,
+        })
+        res.status(200)
+        res.json(updatedCourse)
+      }  else {
+        res.status(401);
+        throw new Error('Server error');
+      }
+    })
+  )
+      
+      
+
 
 export default courseRouter
