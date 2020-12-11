@@ -18,7 +18,9 @@ const courseSchema = mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  tags: [String],
+  tags: {
+    type:String
+  },
   selectedFile: String,
   likeCount: {
     type: Number,
