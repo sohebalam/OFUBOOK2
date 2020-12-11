@@ -42,11 +42,6 @@ courseRouter.put(
 
   authMiddlware, asyncHandler(async (req, res) => {
     // res.send(req.params.id)
-
-
-
-
-   
       const course = await Course.findById(req.params.id)
       
       if(course) {
@@ -59,6 +54,26 @@ courseRouter.put(
       }  else {
         res.status(401);
         throw new Error('Server error');
+      }
+    })
+  )
+  
+  courseRouter.delete(
+  "/:id",
+
+  // authMiddlware, 
+  asyncHandler(async (req, res) => {
+    
+      
+      try {
+        const updatedCourse = await Course.findByIdAndDelete(req.params.id)
+        res.status(200)
+        res.send(course)
+        res.json(updatedCourse)
+      } catch (error) {
+        
+     
+        res.json(error)
       }
     })
   )
