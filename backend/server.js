@@ -4,7 +4,7 @@ import connectDB from "./db.js"
 import dotenv from "dotenv"
 import User from "./models/User.js"
 import userRouter from "./routes/userRoute.js"
-// import courseRouter from "./routes/courseRoute.js"
+import courseRouter from "./routes/courseRoute.js"
 // import bookRouter from "./routes/bookRoute.js"
 import error from "./middleware/errorHandler.js"
 
@@ -23,7 +23,7 @@ app.use(express.json())
 // Routes
 
 app.use("/api/users", userRouter)
-// app.use("/api/users", courseRouter)
+app.use("/api/course", courseRouter)
 // app.use("/api/book", bookRouter)
 
 // Erorr Middleware
