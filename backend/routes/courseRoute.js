@@ -4,7 +4,7 @@ import authMiddlware from "../middleware/authMiddleware.js"
 import Course from "../models/course.js"
 const courseRouter = express.Router()
 
-//Create Book
+//Create Course
 courseRouter.post(
   "/",
 
@@ -33,7 +33,7 @@ courseRouter.get(
       
     } catch (error) {
       res.status(500)
-      throw new Error('there are no books')
+      throw new Error('there are no courses')
     }
   })
 )

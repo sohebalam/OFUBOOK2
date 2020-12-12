@@ -12,7 +12,9 @@ dotenv.config({ path: "./config.env" })
 
 const app = express()
 
-const dbUrl = "mongodb://localhost:27017/OFUBOOK"
+
+
+
 
 connectDB()
 
